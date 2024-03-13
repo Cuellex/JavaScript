@@ -11,17 +11,17 @@ class Libro{
 
 let estanteria = [];
 
-estanteria.push(new Libro("El Señor de los Anillos",    "J.R.R. Tolkien",               "Fantasía",     "No"));
-estanteria.push(new Libro("El Código da Vinci",         "Dan Brown",                    "Misterio",     "Si"));
-estanteria.push(new Libro("Crepusculo",                 "Stephenie Meyer",              "Romantica",    "Si"));
-estanteria.push(new Libro("El principito",              "Antonie de Saint-Exupéry",     "Poésia",       "No"));
-estanteria.push(new Libro("Harry Potter",               "J.K. Rowling",                 "Fantasía",     "Si"));
-estanteria.push(new Libro("1984",                       "George Orwell",                "Distopía",     "No"));
+estanteria.push(new Libro("El Señor de los Anillos",    "J.R.R. Tolkien",               "Fantasía",     "No disponible"));
+estanteria.push(new Libro("El Código da Vinci",         "Dan Brown",                    "Misterio",     "Disponible"));
+estanteria.push(new Libro("Crepusculo",                 "Stephenie Meyer",              "Romantica",    "Disponible"));
+estanteria.push(new Libro("El principito",              "Antonie de Saint-Exupéry",     "Poésia",       "No disponible"));
+estanteria.push(new Libro("Harry Potter",               "J.K. Rowling",                 "Fantasía",     "Disponible"));
+estanteria.push(new Libro("1984",                       "George Orwell",                "Distopía",     "No disponible"));
 
 /* Funciones */
 
 function buscarLibroPorTitulo(titulo){
-    for (var i = 0; i < estanteria.length; i++) {
+    for (let i = 0; i < estanteria.length; i++) {
         if(estanteria[i].titulo.toLowerCase() === titulo.toLowerCase()) {
             return estanteria[i];
         }
@@ -30,8 +30,8 @@ function buscarLibroPorTitulo(titulo){
 }
     
 function filtrarLibrosPorGenero(genero) {
-    var librosFiltrados = [];
-    for (var i = 0; i < estanteria.length; i++) {
+    let librosFiltrados = [];
+    for (let i = 0; i < estanteria.length; i++) {
         if(estanteria[i].genero.toLowerCase() === genero.toLowerCase()) {
             librosFiltrados.push(estanteria[i]);
         }
@@ -39,10 +39,9 @@ function filtrarLibrosPorGenero(genero) {
     return librosFiltrados;
 }
 
-
 function filtrarLibrosPorAutor(autor) {
-    var librosEncontrados = [];
-    for (var i = 0; i < estanteria.length; i++) {
+    let librosEncontrados = [];
+    for (let i = 0; i < estanteria.length; i++) {
         if (estanteria[i].autor.toLowerCase() === autor.toLowerCase()) {
             librosEncontrados.push(estanteria[i]);
         }
@@ -50,23 +49,31 @@ function filtrarLibrosPorAutor(autor) {
     return librosEncontrados;
 }
 
-
 function eleccion() {   /* Punto a revisar: al introduccir una opcion no valida aparecen todos los mensajes pero el bucle del switch case se termina sin poder poner otra vez los valores*/
-    let opcion = prompt("Elija la forma en que quiera buscar su libro:\n Buscar por titulo (1) \n Buscar por genero (2) \n Buscar por autor (3)");
+    let opcion = prompt("Elija la forma en que quiera buscar su libro:\n Buscar por titulo (1) \n Buscar por genero (2) \n Buscar por autor (3) \n Buscar por disponibilidad (4)");
     switch(opcion) {
         case "1": 
-            var libroBuscado = buscarLibroPorTitulo(prompt("Escriba el nombre del libro:"));
+            let libroBuscado = buscarLibroPorTitulo(prompt("Escriba el nombre del libro:"));
             console.log("Libros encontrados:", libroBuscado);
         break;
-
+        
         case "2":
-            var librosPorGenero = filtrarLibrosPorGenero(prompt("Escriba el genero del libro:"));
+            let librosPorGenero = filtrarLibrosPorGenero(prompt("Escriba el genero del libro:"));
             console.log("Libros encontrados", librosPorGenero);
         break;
 
         case "3":
-            var librosPorAutor = filtrarLibrosPorAutor(prompt("Escriba el nombre del autor del libro:"));
+            let librosPorAutor = filtrarLibrosPorAutor(prompt("Escriba el nombre del autor del libro:"));
             console.log("Libros encontrados:", librosPorAutor);
+        break;
+
+        case "4":
+            let librosDisponibles = prompt("Escriba lo que busca (Disponible/No disponible)");
+            const buscado = estanteria.filter((el) =>{
+                return el.alquilado.toLowerCase() === librosDisponibles.toLowerCase()}
+            )
+            console.log(buscado)
+
         break;
 
         default:
@@ -77,10 +84,7 @@ function eleccion() {   /* Punto a revisar: al introduccir una opcion no valida 
     }        
 }
 
-
 eleccion()
-
- 
 
 /* 
 let costeTotal =  0;
