@@ -1,25 +1,96 @@
 /* Clases, variables, arrays */
 
-class Libro{
+const btnSearch = document.querySelector("#btnSearch"),
+    inputIngreso = document.querySelector("#ingreso"),
+    contenedor = document.querySelector("#contenedor");
+const inputUser = document.querySelector("#user");
+
+class añadirLibro{
     constructor(titulo, autor, genero, alquilado){
-        this.titulo     = titulo;
-        this.autor      = autor;
-        this.genero     = genero;
-        this.alquilado  = alquilado;
+        this.titulo         = titulo;
+        this.autor          = autor;
+        this.genero         = genero;
+        this.disponibilidad = disponibilidad;
+        this.img            = img;
     }
 }
 
-let estanteria = [];
+let estanteria = [
+    {id: 1, titulo:"El Señor de los Anillos",   autor:"J.R.R. Tolkien",             genero:"Fantasía",  disponibilidad:"No disponible",  img:"el-señor-de-los-anillos.webp"},
+    {id: 2, titulo:"El Código da Vinci",        autor:"Dan Brown",                  genero:"Misterio",  disponibilidad:"Disponible",     img:"el-codigo-da-vinci.webp"},
+    {id: 3, titulo:"Crepusculo",                autor:"Stephenie Meyer",            genero:"Romantica", disponibilidad:"Disponible",     img:"crepusculo.webp"},
+    {id: 4, titulo:"El principito",             autor:"Antonie de Saint-Exupéry",   genero:"Poésia",    disponibilidad:"No disponible",  img:"el-principito.webp"},
+    {id: 5, titulo:"Harry Potter",              autor:"J.K. Rowling",               genero:"Fantasía",  disponibilidad:"No disponible",  img:"harry-potter.webp"},
+    {id: 6, titulo:"1984",                      autor:"George Orwell",              genero:"Distopía",  disponibilidad:"Disponible",     img:"1984.webp"}
+]
 
-estanteria.push(new Libro("El Señor de los Anillos",    "J.R.R. Tolkien",               "Fantasía",     "No disponible"));
-estanteria.push(new Libro("El Código da Vinci",         "Dan Brown",                    "Misterio",     "Disponible"));
-estanteria.push(new Libro("Crepusculo",                 "Stephenie Meyer",              "Romantica",    "Disponible"));
-estanteria.push(new Libro("El principito",              "Antonie de Saint-Exupéry",     "Poésia",       "No disponible"));
-estanteria.push(new Libro("Harry Potter",               "J.K. Rowling",                 "Fantasía",     "Disponible"));
-estanteria.push(new Libro("1984",                       "George Orwell",                "Distopía",     "No disponible"));
 
 /* Funciones */
 
+//Función de busqueda
+document.getElementById("botonBuscar").addEventListener("click", function(){
+    let filtro = document.getElementById("busqueda").value.toLocaleLowerCase();
+    let libros = document.getElementsByClassName("card");
+
+    for (let i = 0; i < libros.length; i++) {
+        let titulo = libros[i].querySelector("h3").innerText.toLowerCase();
+        if (titulo.includes(filtro)) {
+            libros[i].style.display = "block"; // Muestra las tarjetas que coincidan
+        } else {
+            libros[i].style.display = "none"; // Oculta las tarjetas que no coincidan
+        }
+    }
+})
+
+//función de retención con clave (storage)
+document.addEventListener("DOMContentLoaded", function() {
+    var estadoGuardado = localStorage.getItem("estadoLibros");
+    if (estadoGuardado) {
+        document.getElementById("contenedor").innerHTML = estadoGuardado;
+    }
+
+    // Agregar evento de clic al botón de búsqueda
+    document.getElementById("botonBuscar").addEventListener("click", function() {
+        var filtro = document.getElementById("busqueda").value.toLowerCase();
+        var libros = document.getElementsByClassName("card");
+
+        for (var i = 0; i < libros.length; i++) {
+            var titulo = libros[i].querySelector("h3").innerText.toLowerCase();
+            if (titulo.includes(filtro)) {
+                libros[i].style.display = "block"; // Mostrar libros que coincidan
+            } else {
+                libros[i].style.display = "none"; // Ocultar libros que no coincidan
+            }
+        }
+
+        // Guardar el estado actual en el almacenamiento local
+        localStorage.setItem("estadoLibros", document.getElementById("contenedor").innerHTML);
+    });
+});
+
+//creador de libros/cartas
+ function crearCartas(arr){ /* Añadir una breve descripción o sinopsis del libro */
+    contenedor.innerHTML = "";
+    let html;   
+    for (const el of arr) {     
+        html = `<div class="card">
+                    <hr>
+                    <div><img src="./img/${el.img}" alt="${el.titulo}"></div>
+                    <div>
+                        <h3>${el.titulo}</h3>
+                        <p>Genero: ${el.genero}</p>
+                        <p>Estado: ${el.disponibilidad}</p>
+                        <button class="btn-sucess card-act" id="${el.id}">Agregar</button>
+                    </div>
+                </div>`;
+        contenedor.innerHTML = contenedor.innerHTML + html;
+    }
+}
+
+crearCartas(estanteria)
+
+
+/*
 function buscarLibroPorTitulo(titulo){
     for (let i = 0; i < estanteria.length; i++) {
         if(estanteria[i].titulo.toLowerCase() === titulo.toLowerCase()) {
@@ -47,9 +118,9 @@ function filtrarLibrosPorAutor(autor) {
         }
     }
     return librosEncontrados;
-}
+}*/
 
-function eleccion() {   /* Punto a revisar: al introduccir una opcion no valida aparecen todos los mensajes pero el bucle del switch case se termina sin poder poner otra vez los valores*/
+/* function eleccion() {   Punto a revisar: al introduccir una opcion no valida aparecen todos los mensajes pero el bucle del switch case se termina sin poder poner otra vez los valores
     let opcion = prompt("Elija la forma en que quiera buscar su libro:\n Buscar por titulo (1) \n Buscar por genero (2) \n Buscar por autor (3) \n Buscar por disponibilidad (4)");
     switch(opcion) {
         case "1": 
@@ -82,11 +153,9 @@ function eleccion() {   /* Punto a revisar: al introduccir una opcion no valida 
         break;
 
     }        
-}
+}*/
 
-eleccion()
-
-/* 
+/*
 let costeTotal =  0;
 let confirmacion = 0;
 

@@ -1,0 +1,32 @@
+body{
+    color: aliceblue;
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(/img/fondo1.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+body ::-webkit-scrollbar {
+    width: 10px;
+  }
+  body ::-webkit-scrollbar-track {
+    background: #181a1b;
+  }
+  body ::-webkit-scrollbar-thumb {
+    background: #0b0f13;
+  }
+  
+body, main{
+  margin: 5%;
+  height: max-content;
+  display: block;
+}
+.card{
+  display: none;
+  margin: 5px;
+  align-self: center;
+}
+.card img{
+  height: 200px;
+  max-width: 100%;
+  display: inline-block;
+}
