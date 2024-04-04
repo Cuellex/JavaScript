@@ -1,0 +1,50 @@
+[
+    {
+        "id":1,
+        "titulo":"El Señor de los Anillos",
+        "autor":"J.R.R. Tolkien",
+        "genero":"Fantasía",
+        "disponibilidad":"No disponible",
+        "img":"el-señor-de-los-anillos.webp"
+    },
+    {
+        "id":2,
+        "titulo":"El Código da Vinci",
+        "autor":"Dan Brown",
+        "genero":"Misterio",
+        "disponibilidad":"Disponible",
+        "img":"el-codigo-da-vinci.webp"
+    },
+    {
+        "id":3,
+        "titulo":"Crepusculo",
+        "autor":"Stephenie Meyer",
+        "genero":"Romantica",
+        "disponibilidad":"Disponible",
+        "img":"crepusculo.webp"
+    },
+    {
+        "id":4,
+        "titulo":"El principito",
+        "autor":"Antonie de Saint-Exupéry",
+        "genero":"Poésia",
+        "disponibilidad":"No disponible",
+        "img":"el-principito.webp"
+    },
+    {
+        "id":5,
+        "titulo":"Harry Potter y la piedra filosofal",
+        "autor":"J.K. Rowling",
+        "genero":"Fantasía",
+        "disponibilidad":"No disponible",
+        "img":"harry-potter.webp"
+    },
+    {
+        "id":6,
+        "titulo":"1984",
+        "autor":"George Orwell",
+        "genero":"Distopía",
+        "disponibilidad":"Disponible",
+        "img":"1984.webp"
+    }
+]
